@@ -3,7 +3,7 @@
 This adjustment forwards all URLs starting with `/learn/...` to the official overleaf docs.
 
 As this documentation is not part of community-releases of Overleaf, self-hosted instances usually throw a `404` error.
-With this change in configuration, the Overleaf-internal `nginx` responds with a `308 Permanent Redirect` to `https://overleaf.com/learn/...`,
+With this change in configuration, the Overleaf-internal `nginx` responds with a `308 Permanent Redirect` to `https://www.overleaf.com/learn/...`,
 which often performs one more redirect to point to the actual documentation.
 
 ## Config options
