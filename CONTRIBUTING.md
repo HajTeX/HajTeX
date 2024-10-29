@@ -60,6 +60,6 @@ We create proper git branches & tags for upstream releases:
   - After a feature has been tested on the new release, the feature can be merged into the
     `release/vX.Y.Z` branch
   - When all features are merged, the tag `vX.Y.Z` can be created
-- This results in two tags per upstream release: one tag `vX.Y.Z-upstream´ for the unmodified
+- This results in two tags per upstream release: one tag `vX.Y.Z-upstream` for the unmodified
   upstream code and one tag `vX.Y.Z` for the corresponding HajTeX release
 - New features should be developed based on the latest release branch
