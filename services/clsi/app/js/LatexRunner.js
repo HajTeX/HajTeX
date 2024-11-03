@@ -161,6 +161,7 @@ function _buildLatexCommand(mainFile, opts = {}) {
     '-auxdir=$COMPILE_DIR',
     '-outdir=$COMPILE_DIR',
     '-synctex=1',
+    '-shell-escape',
     '-interaction=batchmode'
   )
 
