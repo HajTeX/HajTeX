@@ -148,14 +148,24 @@ nav.navbar.navbar-default.navbar-main.website-redesign-navbar
 
 						// login link
 						li.secondary
-							a(
-								href="/login"
-								event-tracking="menu-click"
-								event-tracking-action="clicked"
-								event-tracking-trigger="click"
-								event-tracking-mb="true"
-								event-segmentation={ page: currentUrl, item: 'login', location: 'top-menu' }
-							) #{translate('log_in')}
+							if settings.oidc.enable
+								a(
+									href="/login/oidc"
+									event-tracking="menu-click"
+									event-tracking-action="clicked"
+									event-tracking-trigger="click"
+									event-tracking-mb="true"
+									event-segmentation={ page: currentUrl, item: 'login', location: 'top-menu' }
+								) #{translate('login_oidc', {provider: settings.oidc.nameShort})}
+							else
+								a(
+									href="/login"
+									event-tracking="menu-click"
+									event-tracking-action="clicked"
+									event-tracking-trigger="click"
+									event-tracking-mb="true"
+									event-segmentation={ page: currentUrl, item: 'login', location: 'top-menu' }
+								) #{translate('log_in')}
 
 					// projects link and account menu
 					if getSessionUser()

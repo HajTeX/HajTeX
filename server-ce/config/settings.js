@@ -48,6 +48,13 @@ const DATA_DIR = '/var/lib/overleaf/data'
 const TMP_DIR = '/var/lib/overleaf/tmp'
 
 const settings = {
+  oidc: {
+    enable: process.env.OIDC_ENABLE || false,
+    updateUserDetailsOnLogin: process.env.OIDC_ENABLE || false,
+    nameShort: process.env.OIDC_NAME_SHORT || "OIDC",
+    nameLong: process.env.OIDC_NAME_LONG || "OIDC",
+  },
+
   clsi: {
     optimiseInDocker: process.env.OPTIMISE_PDF === 'true',
   },
