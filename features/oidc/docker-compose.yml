@@ -1,0 +1,42 @@
+services:
+  sharelatex:
+    environment:
+      # enables/disables OIDC login
+      # [true, false]
+      OIDC_ENABLE: false
+
+      # changes the name of the OIDC provider to be displayed in the navbar ([NAME]-Login)
+      # String
+      OIDC_NAME_SHORT: "OIDC"
+
+      # variant of OIDC_NAME_SHORT to be displayed when more space is available (currently unused)
+      # String
+      OIDC_NAME_LONG: "OIDC"
+
+      # see the documentation of [OpenID-Connect-Core](https://openid.net/specs/openid-connect-core-1_0.html)
+      # URL
+      OIDC_ISSUER: ""
+
+      # see the documentation of [OpenID-Connect-Core](https://openid.net/specs/openid-connect-core-1_0.html)
+      # URL
+      OIDC_AUTHORIZATION_URL: ""
+
+      # see the documentation of [OpenID-Connect-Core](https://openid.net/specs/openid-connect-core-1_0.html)
+      # URL
+      OIDC_TOKEN_URL: ""
+
+      # see the documentation of [OpenID-Connect-Core](https://openid.net/specs/openid-connect-core-1_0.html)
+      # URL
+      OIDC_USERINFO_URL: ""
+
+      # see the documentation of [OpenID-Connect-Core](https://openid.net/specs/openid-connect-core-1_0.html)
+      # String
+      OIDC_CLIENT_ID: ""
+
+      # see the documentation of [OpenID-Connect-Core](https://openid.net/specs/openid-connect-core-1_0.html)
+      # String
+      OIDC_CLIENT_SECRET: ""
+
+      # see the documentation of [OpenID-Connect-Core](https://openid.net/specs/openid-connect-core-1_0.html)
+      # URL
+      OIDC_CALLBACK_URL: ""

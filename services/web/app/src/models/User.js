@@ -229,6 +229,8 @@ const UserSchema = new Schema(
     dsMobileApp: {
       subscribed: { type: Boolean },
     },
+    oidcUID: { type: String },
+    oidcUsername: { type: String },
   },
   { minimize: false }
 )
