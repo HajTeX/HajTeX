@@ -113,6 +113,13 @@ const httpPermissionsPolicy = {
 module.exports = {
   env: 'server-ce',
 
+  oidc: {
+    enable: process.env.OIDC_ENABLE || false,
+    updateUserDetailsOnLogin: process.env.OIDC_ENABLE || false,
+    nameShort: process.env.OIDC_NAME_SHORT || "OIDC",
+    nameLong: process.env.OIDC_NAME_LONG || "OIDC",
+  },
+
   limits: {
     httpGlobalAgentMaxSockets: 300,
     httpsGlobalAgentMaxSockets: 300,
