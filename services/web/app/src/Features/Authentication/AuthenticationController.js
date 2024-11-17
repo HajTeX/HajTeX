@@ -9,6 +9,8 @@ const querystring = require('querystring')
 const Settings = require('@overleaf/settings')
 const basicAuth = require('basic-auth')
 const tsscmp = require('tsscmp')
+const {User} = require("../../models/User");
+const UserCreator = require("../User/UserCreator");
 const UserHandler = require('../User/UserHandler')
 const UserSessionsManager = require('../User/UserSessionsManager')
 const Analytics = require('../Analytics/AnalyticsManager')
@@ -600,6 +602,65 @@ const AuthenticationController = {
       delete req.session.postLoginRedirect
     }
   },
+
+  oidcLogin(req, res, next) {
+    return passport.authenticate('openidconnect')(req, res, next)
+  },
+
+  oidcLoginCallback(req, res, next) {
+    return passport.authenticate('openidconnect',
+        {failureRedirect: '/login', failureMessage: true}, function (err, user) {
+          if (err) {
+            return next(err)
+          }
+          AuthenticationController.finishLogin(user, req, res, next)
+        }
+    )(req, res, next)
+  },
+
+  verifyOpenIDConnect(issuer, profile, callback) {
+      User.findOne({oidcUID: profile.id}).then(user => {
+        if (!user) {
+          UserCreator.createNewUser({
+            holdingAccount: false,
+            email: profile.emails[0].value,
+            first_name: profile.name?.givenName || "",
+            last_name: profile.name?.familyName || "",
+            oidcUID: profile.id,
+            oidcUsername: profile.username,
+          }, (err, user) => {
+            if(err) {
+              return callback(err);
+            }
+            return callback(null, user);
+          })
+        } else {
+          user.first_name = profile.name?.givenName || "";
+          user.last_name = profile.name?.familyName || "";
+          user.oidcUsername = profile.username;
+          if (user.email != profile.emails[0].value) {
+            user.email = profile.emails[0].value;
+
+            const reversedHostname = user.email.split('@')[1].split('').reverse().join('')
+            const emailData = {
+              email: user.email,
+              createdAt: new Date(),
+              reversedHostname,
+            }
+            user.emails = [emailData]
+          }
+
+          user.save().catch(error => {
+            return callback(error);
+          }).then(user => {
+            return callback(null, user);
+          })
+        }
+      }
+    ).catch(error => {
+      return callback(error);
+    })
+  }
 }
 
 function _afterLoginSessionSetup(req, user, callback) {

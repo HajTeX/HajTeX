@@ -20,6 +20,7 @@ import cookieParser from 'cookie-parser'
 import bearerTokenMiddleware from 'express-bearer-token'
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
+import { Strategy as OpenIDConnectStrategy } from 'passport-openidconnect'
 import ReferalConnect from '../Features/Referal/ReferalConnect.mjs'
 import RedirectManager from './RedirectManager.js'
 import translations from './Translations.js'
@@ -210,16 +211,36 @@ if (Features.hasFeature('saas')) {
 webRouter.use(passport.initialize())
 webRouter.use(passport.session())
 
-passport.use(
-  new LocalStrategy(
-    {
-      passReqToCallback: true,
-      usernameField: 'email',
-      passwordField: 'password',
-    },
-    AuthenticationController.doPassportLogin
+if(Settings.oidc.enable) {
+  passport.use(
+    new OpenIDConnectStrategy(
+      {
+        issuer: process.env.OIDC_ISSUER,
+        authorizationURL: process.env.OIDC_AUTHORIZATION_URL,
+        tokenURL: process.env.OIDC_TOKEN_URL,
+        userInfoURL: process.env.OIDC_USERINFO_URL,
+        clientID: process.env.OIDC_CLIENT_ID,
+        clientSecret: process.env.OIDC_CLIENT_SECRET,
+        callbackURL: process.env.OIDC_CALLBACK_URL,
+        scope: 'openid profile email',
+      },
+      AuthenticationController.verifyOpenIDConnect
+    )
   )
-)
+}
+else {
+  passport.use(
+    new LocalStrategy(
+      {
+        passReqToCallback: true,
+        usernameField: 'email',
+        passwordField: 'password',
+      },
+      AuthenticationController.doPassportLogin
+    )
+  )
+}
+
 passport.serializeUser(AuthenticationController.serializeUser)
 passport.deserializeUser(AuthenticationController.deserializeUser)
 
