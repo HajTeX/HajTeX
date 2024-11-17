@@ -59,6 +59,9 @@ async function settingsPage(req, res) {
   if (Settings.saml && Settings.saml.updateUserDetailsOnLogin) {
     shouldAllowEditingDetails = false
   }
+  if (Settings.oidc && Settings.oidc.updateUserDetailsOnLogin) {
+    shouldAllowEditingDetails = false
+  }
   const oauthProviders = Settings.oauthProviders || {}
 
   const user = await UserGetter.promises.getUser(userId)
