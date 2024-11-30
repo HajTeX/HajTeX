@@ -27,6 +27,51 @@ By default, Overleaf finds and matches users according to their `email` field. T
 
 New users will be created automatically, and existing users will be updated with `first_name`, `last_name` and `email` provided by OIDC on login.
 
+For migrating existing users, a script like the following can be used: (assuming `username-to-oidcUID.csv` is present in the current directory and the mongodb is forwarded to the localhost)
+```py
+from pymongo import MongoClient
+
+# read translation file: username -> oidcUID in CSV
+translation = {}
+with open('username-to-oidcUID.csv') as f:
+    for line in f:
+        if line.count(',') != 1:
+            print('Invalid line: ' + line)
+            exit(1)
+        username, oidcUID = line.strip().split(',')
+        translation[username] = oidcUID
+
+# connect to local mongodb
+client = MongoClient("mongodb://127.0.0.1:27017/", 27017, replicaset='overleaf', directConnection=True)
+# with replicase
+
+# open sharelatex db
+db = client['sharelatex']
+
+success = 0
+failure = 0
+
+# rename "oidcUID" to "oidcUsername" in all users and add "oidcUID" based on translation file
+users = db['users']
+for user in users.find():
+    if 'oidcUID' not in user:
+        print('User: ' + str(user['_id']) + ' does not have oidcUID')
+        failure += 1
+        continue
+
+    oidcUsername = user['oidcUID']
+    if oidcUsername not in translation:
+        print('User: ' + str(user['_id']) + ' oidcUID: ' + oidcUsername + ' not found in translation file')
+        failure += 1
+        continue
+
+    users.update_one({'_id': user['_id']}, {'$set': {'oidcUsername': oidcUsername, 'oidcUID': translation[oidcUsername]}})
+    success += 1
+
+print('Success: ' + str(success))
+print('Failure: ' + str(failure))
+```
+
 ## Uninstalling
 
 To uninstall/disable this feature, `OIDC_ENABLE` can be set to `false` or the respective commit can be removed from the history. No changes to the database or related code are required. When OIDC is disabled, users will be able to log in to their existing profiles according to the email address provided by OIDC at the time of their last login. Note that OIDC does not use or update the `hashedPassword` field, so users created via OIDC will not be able to login until they reset their password. The field `oidcUID` can remain in the database and will not be used/changed by Overleaf.
