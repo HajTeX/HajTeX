@@ -1,4 +1,4 @@
-# `feature/oidc`
+# Login with Open ID Connect (OIDC)
 
 With this feature, Overleaf supports user login via OIDC.
 
