@@ -19,6 +19,8 @@ Note that Overleaf usually matches users by email address, while OIDC uses its o
 - `OIDC_CLIENT_SECRET`: `String`, see the documentation of [OpenID-Connect-Core](https://openid.net/specs/openid-connect-core-1_0.html)
 - `OIDC_CALLBACK_URL`: `URL`, see the documentation of [OpenID-Connect-Core](https://openid.net/specs/openid-connect-core-1_0.html)
 
+All relevant URLs can be found at the `.well-known/openid-configuration` endpoint in your authentication provider.
+
 ## Installing
 
 The entire user database needs to be adjusted to allow existing users to be logged in via OIDC without creating a new profile. This has to be done manually.
