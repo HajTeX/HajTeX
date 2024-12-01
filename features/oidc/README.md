@@ -23,23 +23,23 @@ Note that Overleaf usually matches users by email address, while OIDC uses its o
 
 The entire user database needs to be adjusted to allow existing users to be log in via OIDC without creating a new profile. This has to be done manually by adjusting the database appropriately.
 
-By default, Overleaf finds and matches users according to their `email` field. This feature creates and uses a new field called `oidcUID` instead, containing the user ID as provided by the authentication provider. Thus, it is required to add this field to existing users, otherwise new profiles will be created on the first login via OIDC. Additionally, an (unused) field `oidcUsername` is created, to allow administrators to find users based on username, next to email address or ID.
+By default, Overleaf finds and matches users according to their `email` field. This feature creates and uses a new field called `oidcUID` instead, containing the user ID as provided by the authentication provider through `passport-openidconnect`. Here, the `profile.id` is set to the `sub` field by OIDC, using `user_id` as fallback if no such field is provided. Thus, it is required to add an `oidcUID` to existing users, otherwise new profiles will be created on the first login via OIDC. Additionally, an (unused) field `oidcUsername` is created, to allow administrators to find users based on username, next to email address or ID.
 
 New users will be created automatically, and existing users will be updated with `first_name`, `last_name` and `email` provided by OIDC on login.
 
-For migrating existing users, a script like the following can be used: (assuming `username-to-oidcUID.csv` is present in the current directory and the mongodb is forwarded to the localhost)
+For migrating existing users, a script like the following can be used: (assuming `email-to-oidcUID.csv` is present in the current directory and the mongodb is forwarded to the localhost)
 ```py
 from pymongo import MongoClient
 
-# read translation file: username -> oidcUID in CSV
+# read translation file: email -> oidcUID in CSV
 translation = {}
-with open('username-to-oidcUID.csv') as f:
+with open('email-to-oidcUID.csv') as f:
     for line in f:
         if line.count(',') != 1:
             print('Invalid line: ' + line)
             exit(1)
-        username, oidcUID = line.strip().split(',')
-        translation[username] = oidcUID
+        email, oidcUID = line.strip().split(',')
+        translation[email] = oidcUID
 
 # connect to local mongodb
 client = MongoClient("mongodb://127.0.0.1:27017/", 27017, replicaset='overleaf', directConnection=True)
@@ -51,21 +51,21 @@ db = client['sharelatex']
 success = 0
 failure = 0
 
-# rename "oidcUID" to "oidcUsername" in all users and add "oidcUID" based on translation file
+# add "oidcUID" to users based on email-mapping
 users = db['users']
 for user in users.find():
-    if 'oidcUID' not in user:
-        print('User: ' + str(user['_id']) + ' does not have oidcUID')
+    if 'email' not in user:
+        print('User: ' + str(user['_id']) + ' does not have email')
         failure += 1
         continue
 
-    oidcUsername = user['oidcUID']
-    if oidcUsername not in translation:
-        print('User: ' + str(user['_id']) + ' oidcUID: ' + oidcUsername + ' not found in translation file')
+    email = user['email']
+    if email not in translation:
+        print('User: ' + str(user['_id']) + ' email: ' + email + ' not found in translation file')
         failure += 1
         continue
 
-    users.update_one({'_id': user['_id']}, {'$set': {'oidcUsername': oidcUsername, 'oidcUID': translation[oidcUsername]}})
+    users.update_one({'_id': user['_id']}, {'$set': {'oidcUID': translation[email]}})
     success += 1
 
 print('Success: ' + str(success))
