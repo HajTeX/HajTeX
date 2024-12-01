@@ -21,7 +21,7 @@ Note that Overleaf usually matches users by email address, while OIDC uses its o
 
 ## Installing
 
-The entire user database needs to be adjusted to allow existing users to be log in via OIDC without creating a new profile. This has to be done manually by adjusting the database appropriately.
+The entire user database needs to be adjusted to allow existing users to be logged in via OIDC without creating a new profile. This has to be done manually.
 
 By default, Overleaf finds and matches users according to their `email` field. This feature creates and uses a new field called `oidcUID` instead, containing the user ID as provided by the authentication provider through `passport-openidconnect`. Here, the `profile.id` is set to the `sub` field by OIDC, using `user_id` as fallback if no such field is provided. Thus, it is required to add an `oidcUID` to existing users, otherwise new profiles will be created on the first login via OIDC. Additionally, an (unused) field `oidcUsername` is created, to allow administrators to find users based on username, next to email address or ID.
 
