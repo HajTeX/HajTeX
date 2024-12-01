@@ -2,7 +2,7 @@
 
 With this feature, Overleaf supports user login via OIDC.
 
-Usually, Overleaf uses its own user management for creating profiles, managing projects and access rights and similar. It includes leftover code for supporting LDAP and SAML, but both are not fully included in the Community Edition. `feature/oidc` implements OIDC using `passport-openidconnect`, allowing an external user management system to be connected to Overleaf.
+Usually, Overleaf uses its own user management for creating profiles, managing projects and access rights and similar. It includes leftover code for supporting LDAP and SAML, but both are not fully included in the Community Edition. This feature implements OIDC using `passport-openidconnect`, allowing an external user management system to be connected to Overleaf.
 
 Note that Overleaf usually matches users by email address, while OIDC uses its own UID! Refer to [Installing](#Installing) for more information.
 
