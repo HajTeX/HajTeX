@@ -23,7 +23,7 @@ Most importantly, the following rule is established:
 
 An example file can be found below:
 ```md
-# `feature/example`
+# Example Feature
 
 This adjustment does some important things that should be documented here.
 
