@@ -10,7 +10,7 @@ export default function HelpMenu() {
 
   return (
     <>
-      <h4>{t('help')}</h4>
+      <h4>{t('category_misc')}</h4>
       <ul className="list-unstyled nav">
         <li>
           <HelpShowHotkeys />

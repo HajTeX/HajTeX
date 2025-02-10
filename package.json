@@ -51,6 +51,7 @@
     "services/clsi",
     "services/clsi-perf",
     "services/contacts",
+    "services/gitsync",
     "services/docstore",
     "services/document-updater",
     "services/filestore",

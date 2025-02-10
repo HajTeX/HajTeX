@@ -1,7 +1,7 @@
 version: '2.2'
 services:
     sharelatex:
-        restart: always
+        restart: unless-stopped
         # Server Pro users:
         # image: quay.io/sharelatex/sharelatex-pro
         image: sharelatex/sharelatex
@@ -20,7 +20,7 @@ services:
             ####  Server Pro: Uncomment the following line to mount the docker  ####
             ####             socket, required for Sibling Containers to work    ####
             ########################################################################
-            # - /var/run/docker.sock:/var/run/docker.sock
+            - /var/run/docker.sock:/var/run/docker.sock
         environment:
 
             OVERLEAF_APP_NAME: Overleaf Community Edition
@@ -101,7 +101,7 @@ services:
             # OVERLEAF_PROXY_LEARN: "true"
 
     mongo:
-        restart: always
+        restart: unless-stopped
         image: mongo:5.0
         container_name: mongo
         command: '--replSet overleaf'
@@ -119,9 +119,22 @@ services:
             interval: 10s
             timeout: 10s
             retries: 5
+    mongo_init:
+        image: mongo:5.0
+        container_name: mongo_init
+        hostname: mongo_init
+        entrypoint: /bin/sh
+        command:
+            - -c
+            - |
+               mongo --host=mongo --eval "rs.initiate({ _id: \"overleaf\", members: [ { _id: 0, host: \"mongo:27017\" } ] })"
+        depends_on:
+            mongo:
+                condition: service_healthy
+
 
     redis:
-        restart: always
+        restart: unless-stopped
         image: redis:6.2
         container_name: redis
         volumes:

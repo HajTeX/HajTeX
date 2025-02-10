@@ -1872,5 +1872,7 @@
   "zotero_reference_loading_error": "",
   "zotero_reference_loading_error_expired": "",
   "zotero_reference_loading_error_forbidden": "",
-  "zotero_sync_description": ""
+  "zotero_sync_description": "",
+  "gitsync-title": "",
+  "gitsync-setup": ""
 }

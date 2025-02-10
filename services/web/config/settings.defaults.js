@@ -256,6 +256,9 @@ module.exports = {
     contacts: {
       url: `http://${process.env.CONTACTS_HOST || '127.0.0.1'}:3036`,
     },
+    gitsync: {
+      url: `http://${process.env.GITSYNC_HOST || '127.0.0.1'}:3355`,
+    },
     notifications: {
       url: `http://${process.env.NOTIFICATIONS_HOST || '127.0.0.1'}:3042`,
     },

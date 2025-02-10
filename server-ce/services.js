@@ -27,6 +27,9 @@ module.exports = [
     name: 'contacts',
   },
   {
+    name: 'gitsync',
+  },
+  {
     name: 'notifications',
   },
   {

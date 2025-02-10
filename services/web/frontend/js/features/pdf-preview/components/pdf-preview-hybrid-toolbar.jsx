@@ -12,6 +12,7 @@ import { DetachedSynctexControl } from './detach-synctex-control'
 import Icon from '../../../shared/components/icon'
 import BootstrapVersionSwitcher from '@/features/ui/components/bootstrap-5/bootstrap-version-switcher'
 import { Spinner } from 'react-bootstrap-5'
+import PdfGitButton from './pdf-git-button'
 
 const ORPHAN_UI_TIMEOUT_MS = 5000
 
@@ -62,6 +63,7 @@ function PdfPreviewHybridToolbarInner() {
         <PdfCompileButton />
         <PdfHybridLogsButton />
         <PdfHybridDownloadButton />
+        <PdfGitButton />
       </div>
       <div className="toolbar-pdf-right">
         <div className="toolbar-pdf-controls" id="toolbar-pdf-controls" />

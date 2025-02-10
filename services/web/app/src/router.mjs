@@ -32,6 +32,7 @@ import ProjectDownloadsController from './Features/Downloads/ProjectDownloadsCon
 import FileStoreController from './Features/FileStore/FileStoreController.js'
 import DocumentUpdaterController from './Features/DocumentUpdater/DocumentUpdaterController.js'
 import HistoryController from './Features/History/HistoryController.js'
+import GitSyncController from './Features/GitSync/GitSyncController.js'
 import ExportsController from './Features/Exports/ExportsController.js'
 import PasswordResetRouter from './Features/PasswordReset/PasswordResetRouter.js'
 import StaticPagesRouter from './Features/StaticPages/StaticPagesRouter.js'
@@ -799,6 +800,11 @@ async function initialize(webRouter, privateApiRouter, publicApiRouter) {
     '/project/:project_id/restore_file',
     AuthorizationMiddleware.ensureUserCanWriteProjectContent,
     HistoryController.restoreFileFromV2
+  )
+  webRouter.post(
+    '/project/:project_id/gitsync',
+    AuthorizationMiddleware.ensureUserCanWriteProjectContent,
+    GitSyncController.gitsync
   )
   webRouter.post(
     '/project/:project_id/revert_file',
