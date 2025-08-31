@@ -177,7 +177,7 @@ function ReadOrWriteFormGroup({
     return (
       <OLFormGroup controlId={id}>
         <OLFormLabel>{label}</OLFormLabel>
-        <OLFormControl type="text" readOnly value={value} />
+        <OLFormControl type="text" disabled value={value} />
       </OLFormGroup>
     )
   }
