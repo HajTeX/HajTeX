@@ -154,9 +154,6 @@ function SidebarDsNav() {
             </>
           )}
         </div>
-        <div className="ds-nav-ds-name">
-          <span>Digital Science</span>
-        </div>
       </div>
       <div
         {...getHandleProps({
