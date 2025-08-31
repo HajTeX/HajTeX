@@ -7,59 +7,64 @@
 
 /* ====== Sass color variables ====== */
 
-/* Neutral */
-$white: #fff;
-$neutral-10: #f4f5f6;
-$neutral-20: #e7e9ee;
-$neutral-30: #d0d5dd;
-$neutral-40: #afb5c0;
-$neutral-50: #8d96a5;
-$neutral-60: #677283;
-$neutral-70: #495365;
-$neutral-80: #2f3a4c;
-$neutral-90: #1b222c;
+// Neutral
+/* HajTeX: Ink */
+$white: #ffffff;
+$neutral-10: #e5e5e8;
+$neutral-20: #cdccd3;
+$neutral-30: #b3b2bc;
+$neutral-40: #9b99a6;
+$neutral-50: #817f90;
+$neutral-60: #68667a;
+$neutral-70: #4f4c63;
+$neutral-80: #36334d;
+$neutral-90: #1d1937;
 
-/* Green */
-$green-10: #eaf6ef;
-$green-20: #b8dbc8;
-$green-30: #86caa5;
-$green-40: #53b57f;
-$green-50: #098842;
-$green-60: #1e6b41;
-$green-70: #195936;
+// Green
+/* HajTeX: Teal (offset by 10 to be lighter) */
+$green-10: #cdf0ee;
+$green-20: #9be1dd;
+$green-30: #68d3cb;
+$green-40: #36c4ba;
+$green-50: #04b5a9;
+$green-60: #039187;
+$green-70: #026d65;
 
-/* Blue */
-$blue-10: #f1f4f9;
-$blue-20: #c3d0e3;
-$blue-30: #97b6e5;
-$blue-40: #6597e0;
-$blue-50: #366cbf;
-$blue-60: #28518f;
-$blue-70: #214475;
+// Blue
+/* HajTeX: Blue */
+$blue-10: #a7cdfb;
+$blue-20: #a7cdfb;
+$blue-30: #7ab5f8;
+$blue-40: #4e9cf6;
+$blue-50: #2283f4;
+$blue-60: #1b69c3;
+$blue-70: #0e3462;
 
-/* Red */
-$red-10: #f9f1f1;
-$red-20: #f5beba;
-$red-30: #e59d9a;
-$red-40: #e36d66;
-$red-50: #b83a33;
-$red-60: #942f2a;
-$red-70: #782722;
+// Red
+/* HajTeX: Pink */
+$red-10: #fae2ef;
+$red-20: #f5c4e0;
+$red-30: #efa7d0;
+$red-40: #ea89c1;
+$red-50: #e56cb1;
+$red-60: #b7568e;
+$red-70: #89416a;
 
-/* Yellow */
-$yellow-10: #fcf1e3;
-$yellow-20: #fcc483;
-$yellow-30: #f7a445;
-$yellow-40: #de8014;
-$yellow-50: #8f5514;
-$yellow-60: #7a4304;
-$yellow-70: #633a0b;
+// Yellow
+/* HajTeX: Orange */
+$yellow-10: #fdead3;
+$yellow-20: #fbd4a7;
+$yellow-30: #f8bf7a;
+$yellow-40: #f6a94e;
+$yellow-50: #f49422;
+$yellow-60: #c3761b;
+$yellow-70: #925914;
 
 /* ====== Semantic Sass color variables ====== */
 $bg-light-primary: $white;
 $bg-light-secondary: $neutral-10;
 $bg-light-tertiary: $neutral-20;
-$bg-light-disabled: $neutral-20;
+$bg-light-disabled: $neutral-10;
 $bg-dark-primary: $neutral-90;
 $bg-dark-secondary: $neutral-80;
 $bg-dark-tertiary: $neutral-70;
