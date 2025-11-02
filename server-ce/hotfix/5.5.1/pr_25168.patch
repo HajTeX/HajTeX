@@ -1,5 +1,5 @@
---- a/services/history-v1/config/custom-environment-variables.json
-+++ b/services/history-v1/config/custom-environment-variables.json
+--- a/server-ce/config/custom-environment-variables.json
++++ b/server-ce/config/custom-environment-variables.json
 @@ -50,12 +50,14 @@
      "history": {
        "host": "OVERLEAF_REDIS_HOST",
