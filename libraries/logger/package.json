@@ -20,7 +20,6 @@
     "types:check": "tsc --noEmit"
   },
   "dependencies": {
-    "@google-cloud/logging-bunyan": "^5.1.0",
     "@overleaf/fetch-utils": "*",
     "@overleaf/o-error": "*",
     "bunyan": "^1.8.14"
