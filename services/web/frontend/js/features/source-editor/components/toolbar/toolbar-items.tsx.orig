@@ -15,7 +15,6 @@ import { withinFormattingCommand } from '@/features/source-editor/utils/tree-ope
 import { isSplitTestEnabled } from '@/utils/splitTestUtils'
 import { isMac } from '@/shared/utils/os'
 import { useProjectContext } from '@/shared/context/project-context'
-import { usePermissionsContext } from '@/features/ide-react/context/permissions-context'
 
 export const ToolbarItems: FC<{
   state: EditorState
@@ -34,7 +33,6 @@ export const ToolbarItems: FC<{
   const { toggleSymbolPalette, showSymbolPalette, writefullInstance } =
     useEditorContext()
   const { features } = useProjectContext()
-  const permissions = usePermissionsContext()
   const isActive = withinFormattingCommand(state)
 
   const symbolPaletteAvailable = getMeta('ol-symbolPaletteAvailable')
@@ -131,7 +129,7 @@ export const ToolbarItems: FC<{
                 command={commands.wrapInHref}
                 icon="add_link"
               />
-              {features.trackChangesVisible && permissions.comment && (
+              {features.trackChangesVisible && (
                 <ToolbarButton
                   id="toolbar-add-comment"
                   label={t('add_comment')}
