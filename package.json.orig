@@ -40,9 +40,6 @@
       "multer": "2.0.1",
       "path-to-regexp": "3.3.0",
       "qs": "6.13.0"
-    },
-    "request@2.88.2": {
-      "tough-cookie": "5.1.2"
     }
   },
   "scripts": {
