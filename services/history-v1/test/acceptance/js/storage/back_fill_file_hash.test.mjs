@@ -114,7 +114,7 @@ function objectIdFromTime(timestamp) {
 
 const PRINT_IDS_AND_HASHES_FOR_DEBUGGING = false
 
-describe.only('back_fill_file_hash script', function () {
+describe('back_fill_file_hash script', function () {
   this.timeout(TIMEOUT)
 
   const projectId0 = objectIdFromTime('2017-01-01T00:00:00Z')
@@ -1144,7 +1144,6 @@ describe.only('back_fill_file_hash script', function () {
     })
     it('should print the report', () => {
       expect(output.status).to.equal(0)
-      console.log(output.stdout)
       expect(output.stdout).to.equal(`\
 Current status:
 - Total number of projects: 10
@@ -1153,13 +1152,13 @@ Sampling 1000 projects to estimate progress...
 Sampled stats for projects:
 - Sampled projects: 9 (90% of all projects)
 - Sampled projects with all hashes present: 5
-- Percentage of projects that need back-filling hashes: 56% (estimated)
+- Percentage of projects that need back-filling hashes: 44% (estimated)
 - Sampled projects have 11 files that need to be checked against the full project history system.
 - Sampled projects have 3 files that need to be uploaded to the full project history system (estimating 27% of all files).
 Sampled stats for deleted projects:
 - Sampled deleted projects: 4 (80% of all deleted projects)
 - Sampled deleted projects with all hashes present: 3
-- Percentage of deleted projects that need back-filling hashes: 75% (estimated)
+- Percentage of deleted projects that need back-filling hashes: 25% (estimated)
 - Sampled deleted projects have 2 files that need to be checked against the full project history system.
 - Sampled deleted projects have 1 files that need to be uploaded to the full project history system (estimating 50% of all files).
 `)

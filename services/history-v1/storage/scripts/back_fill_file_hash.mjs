@@ -399,7 +399,8 @@ async function getStatsForCollection(
   const fractionSampled = stats.projectCount / collectionCount
   const percentageSampled = (fractionSampled * 100).toFixed(0)
   const fractionConverted = stats.projectsWithAllHashes / stats.projectCount
-  const percentageConverted = (fractionConverted * 100).toFixed(0)
+  const fractionToBackFill = 1 - fractionConverted
+  const percentageToBackFill = (fractionToBackFill * 100).toFixed(0)
   const fractionMissing = stats.fileMissingInHistoryCount / stats.fileCount
   const percentageMissing = (fractionMissing * 100).toFixed(0)
   console.log(
@@ -409,7 +410,7 @@ async function getStatsForCollection(
     `- Sampled ${name} with all hashes present: ${stats.projectsWithAllHashes}`
   )
   console.log(
-    `- Percentage of ${name} that need back-filling hashes: ${percentageConverted}% (estimated)`
+    `- Percentage of ${name} that need back-filling hashes: ${percentageToBackFill}% (estimated)`
   )
   console.log(
     `- Sampled ${name} have ${stats.fileCount} files that need to be checked against the full project history system.`
