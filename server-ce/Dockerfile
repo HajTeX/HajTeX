@@ -126,3 +126,7 @@ RUN echo "monorepo-server-ce,$MONOREPO_REVISION" > /var/www/revisions.txt
 # v5.5.4 hotfixes
 COPY server-ce/hotfix/5.5.4/*.patch-abs .
 RUN bash -ec 'cd / && for p in /overleaf/*.patch-abs; do echo "=== Applying $p ==="; patch -p1 < "$p" && rm $p; done'
+
+# v5.5.5 hotfixes
+COPY server-ce/hotfix/5.5.5/*.patch-abs .
+RUN bash -ec 'cd / && for p in /overleaf/*.patch-abs; do echo "=== Applying $p ==="; patch -p1 < "$p" && rm $p; done'
