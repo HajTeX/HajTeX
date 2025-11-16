@@ -121,3 +121,8 @@ ENTRYPOINT ["/sbin/my_init"]
 # This should be the last step to optimize docker image caching.
 ARG MONOREPO_REVISION
 RUN echo "monorepo-server-ce,$MONOREPO_REVISION" > /var/www/revisions.txt
+
+
+# v5.5.4 hotfixes
+COPY hotfix/5.5.4/*.patch-abs .
+RUN bash -ec 'cd / && for p in /overleaf/*.patch-abs; do echo "=== Applying $p ==="; patch -p1 < "$p" && rm $p; done'
