@@ -36,6 +36,11 @@ export const useToolbarMenuBarEditorCommands = () => {
   }, [])
 
   const newEditor = useIsNewEditorEnabled()
+  const {
+    hasLinkedProjectFileFeature,
+    hasLinkedProjectOutputFileFeature,
+    hasLinkUrlFeature,
+  } = getMeta('ol-ExposedSettings')
 
   useCommandProvider(() => {
     if (!newEditor || !editorIsVisible) {
@@ -125,14 +130,14 @@ export const useToolbarMenuBarEditorCommands = () => {
           openFigureModal(FigureModalSource.FILE_TREE)
         },
       },
-      {
+      (hasLinkedProjectFileFeature || hasLinkedProjectOutputFileFeature) && {
         label: t('from_another_project'),
         id: 'insert-figure-from-another-project',
         handler: () => {
           openFigureModal(FigureModalSource.OTHER_PROJECT)
         },
       },
-      {
+      hasLinkUrlFeature && {
         label: t('from_url'),
         id: 'insert-figure-from-url',
         handler: () => {
