@@ -1329,8 +1329,8 @@ const THEME_LIST = [
   { name: 'dracula', dark: true },
   { name: 'eclipse', dark: false },
   { name: 'monokai', dark: true },
-  { name: 'overleaf', dark: false },
-  { name: 'overleaf_dark', dark: true },
+  { name: 'hajtex', dark: false },
+  { name: 'hajtex_dark', dark: true },
   { name: 'textmate', dark: false },
 ]
 

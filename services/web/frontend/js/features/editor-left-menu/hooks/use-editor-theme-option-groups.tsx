@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import { Option } from '../components/settings/settings-menu-select'
 import { useTranslation } from 'react-i18next'
 
-const overrides = new Map([['overleaf', 'overleaf light']])
+const overrides = new Map([['hajtex', 'hajtex light']])
 function getThemeName(theme: string): string {
   return (overrides.get(theme) ?? theme).replace(/_/g, ' ')
 }
